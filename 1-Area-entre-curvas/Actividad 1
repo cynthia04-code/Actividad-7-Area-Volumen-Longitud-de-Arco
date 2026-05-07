@@ -1,0 +1,28 @@
+import numpy as np
+import matplotlib.pyplot as plt
+
+x = np.linspace(-np.pi/3, np.pi/3, 500)
+y1 = 1 / (np.cos(x)**2)
+y2 = 8 * np.cos(x)
+
+plt.figure(figsize=(10, 6))
+plt.plot(x, y1, label=r'$y = \sec^2(x)$', color='blue', lw=2)
+plt.plot(x, y2, label=r'$y = 8\cos(x)$', color='red', lw=2)
+
+plt.fill_between(x, y1, y2, where=(y2 >= y1), color='gray', alpha=0.3, label='Región de área')
+
+plt.title(r'Área entre $y = \sec^2(x)$ y $y = 8\cos(x)$ en $[-\pi/3, \pi/3]$')
+plt.xlabel('x')
+plt.ylabel('y')
+plt.xticks([-np.pi/3, 0, np.pi/3], [r'$-\pi/3$', '0', r'$\pi/3$'])
+plt.legend()
+plt.grid(True, linestyle='--', alpha=0.6)
+
+plt.show()
+
+val_superior = 8 * np.sin(np.pi/3) - np.tan(np.pi/3)
+val_inferior = 8 * np.sin(-np.pi/3) - np.tan(-np.pi/3)
+area_total = val_superior - val_inferior
+
+print(f"El área exacta es: {area_total:.4f} unidades cuadradas")
+print(f"Expresión analítica: {6 * np.sqrt(3):.4f} (es decir, 6√3)")
